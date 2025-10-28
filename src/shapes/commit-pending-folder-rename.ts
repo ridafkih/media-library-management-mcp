@@ -1,0 +1,13 @@
+import z, { type ZodRawShape } from "zod"
+import { COMMIT_PENDING_FOLDER_RENAME_INPUT_DESCRIBE__IDENTIFIER, COMMIT_PENDING_FOLDER_RENAME_OUTPUT_DESCRIBE__ROOT_FOLDER, COMMIT_PENDING_FOLDER_RENAME_OUTPUT_DESCRIBE__CONTENTS__ENTRY, COMMIT_PENDING_FOLDER_RENAME_OUTPUT_DESCRIBE__CONTENTS } from "../shape-metadata"
+
+export const CommitPendingFolderRenameInput: ZodRawShape = {
+  identifier: z.string().describe(COMMIT_PENDING_FOLDER_RENAME_INPUT_DESCRIBE__IDENTIFIER)
+}
+
+export const CommitPendingFolderRenameOutput: ZodRawShape = {
+  rootFolder: z.string().describe(COMMIT_PENDING_FOLDER_RENAME_OUTPUT_DESCRIBE__ROOT_FOLDER),
+  contents: z.array(
+    z.string().describe(COMMIT_PENDING_FOLDER_RENAME_OUTPUT_DESCRIBE__CONTENTS__ENTRY)
+  ).describe(COMMIT_PENDING_FOLDER_RENAME_OUTPUT_DESCRIBE__CONTENTS),
+}
