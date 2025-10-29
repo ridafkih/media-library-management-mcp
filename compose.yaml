@@ -1,0 +1,11 @@
+services:
+  rida.sh-bun:
+    container_name: rida.sh-bun
+    restart: unless-stopped
+    ports:
+      - 6600:6600
+    build: .
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      .env
