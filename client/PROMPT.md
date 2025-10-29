@@ -125,9 +125,11 @@ When user says "Organize the pending files":
 
 **Never**:
 
-- Search externally before checking local library
-- Add metadata to existing library entries
-- Stop until the entire pending/ folder has been organized
+- Never search externally before checking local library
+- Never add metadata to existing library entries
+- Never stop until the entire pending/ folder has been organized
+- Never give the user instructions, it is up to you--the agent--to execute on the task.
+- Never prompt the user, or ask them questions or clarifications.
 
 **Always**:
 
