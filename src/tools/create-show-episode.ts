@@ -6,6 +6,51 @@ import {
   CreateShowEpisodeOutput,
 } from "../shapes/create-show-episode";
 
+const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
+
+const validateString = (value: unknown, fieldName: string): string => {
+  if (typeof value !== "string") {
+    throw Error(`${fieldName} must be a string`);
+  }
+  return value;
+};
+
+const formatShowFolderName = (
+  name: string,
+  year?: number,
+  identifier?: string
+): string => {
+  const parts = [name];
+  if (year) parts.push(`(${year})`);
+  if (identifier) parts.push(`[${identifier}]`);
+  return parts.join(" ");
+};
+
+const formatSeasonFolder = (seasonNumber: number): string =>
+  `Season ${String(seasonNumber).padStart(2, "0")}`;
+
+const formatEpisodeFilename = (
+  name: string,
+  seasonNumber: number,
+  episodeNumber: number,
+  extension: string
+): string => {
+  const season = String(seasonNumber).padStart(2, "0");
+  const episode = String(episodeNumber).padStart(2, "0");
+  return `${name} S${season}E${episode}${extension}`;
+};
+
+const buildShowDirectory = (
+  showFolder: string,
+  seasonFolder: string
+): string => join(DATA_DIRECTORY_PATH, "shows", showFolder, seasonFolder);
+
+const moveFile = async (source: string, destination: string): Promise<void> => {
+  const directory = join(destination, "..");
+  await mkdir(directory, { recursive: true });
+  await rename(source, destination);
+};
+
 export const createShowEpisodeTool: ToolDefinition = {
   name: "CreateShowEpisode",
   title: "Create Show Episode",
@@ -13,45 +58,25 @@ export const createShowEpisodeTool: ToolDefinition = {
   inputSchema: CreateShowEpisodeInput,
   outputSchema: CreateShowEpisodeOutput,
   handler: async (input) => {
-    const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
     const { name, year, seasonNumber, episodeNumber, sourceFilePath, identifier } = input;
 
-    if (typeof sourceFilePath !== 'string') {
-      throw Error("sourceFilePath must be a string")
-    }
-    
-    const fileExtension = extname(sourceFilePath);
+    const validatedName = validateString(name, "name");
+    const validatedSource = validateString(sourceFilePath, "sourceFilePath");
 
-    if (typeof name !== 'string') {
-      throw Error("name must be a string")
-    }
-    
-    let showFolderName = name;
-    if (year) {
-      showFolderName += ` (${year})`;
-    }
-    if (identifier) {
-      showFolderName += ` [${identifier}]`;
-    }
-
-    const seasonFolder = `Season ${String(seasonNumber).padStart(2, "0")}`;
-
-    const paddedSeason = String(seasonNumber).padStart(2, "0");
-    const paddedEpisode = String(episodeNumber).padStart(2, "0");
-    const episodeFilename = `${name} S${paddedSeason}E${paddedEpisode}${fileExtension}`;
-
-    const showDirectory = join(
-      DATA_DIRECTORY_PATH,
-      "shows",
-      showFolderName,
-      seasonFolder
+    const extension = extname(validatedSource);
+    const showFolder = formatShowFolderName(validatedName, year as number | undefined, identifier as string | undefined);
+    const seasonFolder = formatSeasonFolder(seasonNumber as number);
+    const episodeFilename = formatEpisodeFilename(
+      validatedName,
+      seasonNumber as number,
+      episodeNumber as number,
+      extension
     );
 
-    await mkdir(showDirectory, { recursive: true });
-
+    const showDirectory = buildShowDirectory(showFolder, seasonFolder);
     const destinationPath = join(showDirectory, episodeFilename);
 
-    await rename(sourceFilePath, destinationPath);
+    await moveFile(validatedSource, destinationPath);
 
     return {
       content: [],

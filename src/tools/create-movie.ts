@@ -3,6 +3,36 @@ import { mkdir, rename } from "node:fs/promises";
 import type { ToolDefinition } from "../types/tool";
 import { CreateMovieInput, CreateMovieOutput } from "../shapes/create-movie";
 
+const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
+
+const validateString = (value: unknown, fieldName: string): string => {
+  if (typeof value !== "string") {
+    throw Error(`${fieldName} must be a string`);
+  }
+  return value;
+};
+
+const formatMovieFilename = (
+  name: string,
+  year: number | undefined,
+  identifier: string | undefined,
+  extension: string
+): string => {
+  const parts = [name];
+  if (year) parts.push(`(${year})`);
+  if (identifier) parts.push(`[${identifier}]`);
+  return parts.join(" ") + extension;
+};
+
+const buildMoviesDirectory = (): string =>
+  join(DATA_DIRECTORY_PATH, "movies");
+
+const moveFile = async (source: string, destination: string): Promise<void> => {
+  const directory = join(destination, "..");
+  await mkdir(directory, { recursive: true });
+  await rename(source, destination);
+};
+
 export const createMovieTool: ToolDefinition = {
   name: "CreateMovie",
   title: "Create Movie",
@@ -10,28 +40,22 @@ export const createMovieTool: ToolDefinition = {
   inputSchema: CreateMovieInput,
   outputSchema: CreateMovieOutput,
   handler: async (input) => {
-    const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
     const { name, year, sourceFilePath, identifier } = input;
 
-    if (typeof sourceFilePath !== 'string') {
-      throw Error("sourceFilePath must be a string")
-    }
-    
-    const fileExtension = extname(sourceFilePath);
+    const validatedSource = validateString(sourceFilePath, "sourceFilePath");
 
-    let movieFilename = `${name} (${year})`;
-    if (identifier) {
-      movieFilename += ` [${identifier}]`;
-    }
-    movieFilename += fileExtension;
+    const extension = extname(validatedSource);
+    const movieFilename = formatMovieFilename(
+      name as string,
+      year as number | undefined,
+      identifier as string | undefined,
+      extension
+    );
 
-    const moviesDirectory = join(DATA_DIRECTORY_PATH, "movies");
-
-    await mkdir(moviesDirectory, { recursive: true });
-
+    const moviesDirectory = buildMoviesDirectory();
     const destinationPath = join(moviesDirectory, movieFilename);
 
-    await rename(sourceFilePath, destinationPath);
+    await moveFile(validatedSource, destinationPath);
 
     return {
       content: [],

@@ -7,8 +7,9 @@ import { listShowsTool } from "./tools/list-shows";
 import { searchContentDatabaseTool } from "./tools/search-content-database";
 
 import { registerTool } from "./utils/register-tool";
-import { transport } from "./transport";
 import { mcpServer } from "./mcp-server";
+import { server } from "./http-server";
+import { transport } from "./transport";
 
 registerTool(mcpServer, listPendingTool);
 registerTool(mcpServer, listShowsTool);
@@ -17,3 +18,6 @@ registerTool(mcpServer, createShowEpisodeTool);
 registerTool(mcpServer, createMovieTool);
 registerTool(mcpServer, searchContentDatabaseTool);
 registerTool(mcpServer, listEpisodesTool);
+
+await mcpServer.connect(transport);
+server.listen(3000);
