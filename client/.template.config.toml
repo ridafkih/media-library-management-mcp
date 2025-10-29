@@ -1,0 +1,7 @@
+[model_providers.openai-api]
+name = "OpenAIAPI"
+base_url = "${OPENAI_API_URL}"
+
+[mcp_servers.media-library-management-mcp-server]
+type = "streamable-http"
+url = ${MEDIA_LIBRARY_MANAGEMENT_MCP_SERVER_URL}

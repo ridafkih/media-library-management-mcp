@@ -1,6 +1,6 @@
 services:
   media-library-management-mcp-bun:
-    container_name: media-library-management-mcp
+    container_name: media-library-management-mcp-bun
     restart: unless-stopped
     ports:
       - ${MCP_SERVER_PORT}:${MCP_SERVER_PORT}

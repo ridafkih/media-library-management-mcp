@@ -1,0 +1,9 @@
+services:
+  media-library-management-mcp-client:
+    container_name: media-library-management-mcp-client
+    restart: unless-stopped
+    build: .
+    volumes:
+      - ./PROMPT.md:/root/PROMPT.md
+    env_file:
+      - .env

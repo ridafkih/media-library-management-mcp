@@ -2,7 +2,7 @@
   "mcpServers": {
     "media-library-management-mcp": {
       "type": "streamable-http",
-      "url": "http://localhost:3000/"
+      "url": "${MEDIA_LIBRARY_MANAGEMENT_MCP_SERVER_URL}"
     }
   }
 }
