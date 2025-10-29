@@ -3,6 +3,10 @@
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "start": "bun run --production src/index.ts",
+    "dev": "bun run --hot src/index.ts"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -11,6 +15,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.20.2",
+    "arkenv": "^0.7.3",
     "arktype": "^2.1.25",
     "zod": "3"
   }
