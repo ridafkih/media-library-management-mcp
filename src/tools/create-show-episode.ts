@@ -79,12 +79,12 @@ export const createShowEpisodeTool: ToolDefinition = {
     await validateFileExists(fullSourcePath);
 
     const extension = extname(validatedSource);
-    const showFolder = formatShowFolderName(validatedName, year as number | undefined, identifier as string | undefined);
-    const seasonFolder = formatSeasonFolder(seasonNumber as number);
+    const showFolder = formatShowFolderName(validatedName, year, identifier);
+    const seasonFolder = formatSeasonFolder(seasonNumber);
     const episodeFilename = formatEpisodeFilename(
       validatedName,
-      seasonNumber as number,
-      episodeNumber as number,
+      seasonNumber,
+      episodeNumber,
       extension
     );
 

@@ -61,9 +61,9 @@ export const createMovieTool: ToolDefinition = {
 
     const extension = extname(validatedSource);
     const movieFilename = formatMovieFilename(
-      name as string,
-      year as number | undefined,
-      identifier as string | undefined,
+      name,
+      year,
+      identifier,
       extension
     );
 
