@@ -28,17 +28,17 @@ export const COMMIT_MOVE_FILE_OR_FOLDER_OUTPUT_DESCRIBE__CONTENTS__ENTRY
   = "The committed full file path (relative) to an item in the moved folder"
 
 export const SEARCH_CONTENT_INPUT_DESCRIBE__QUERY
-  = "The search query string for finding movies, TV shows, or anime"
+  = "The search query string for finding content in the database"
 
 export const SEARCH_CONTENT_OUTPUT_DESCRIBE__RESULTS
   = "Search results grouped by provider (imdb, jikan)"
 export const SEARCH_CONTENT_OUTPUT_DESCRIBE__RESULTS__ENTRY
-  = "A single search result entry"
+  = "A single content entry from the search results"
 export const SEARCH_CONTENT_OUTPUT_DESCRIBE__RESULTS__ENTRY__TITLE
-  = "The title of the show or movie"
+  = "The title of the content"
 export const SEARCH_CONTENT_OUTPUT_DESCRIBE__RESULTS__ENTRY__TITLE_ORIGINAL
-  = "The original title of the show or movie (if different from title)"
+  = "The original title of the content (if different from title)"
 export const SEARCH_CONTENT_OUTPUT_DESCRIBE__RESULTS__ENTRY__YEAR
-  = "The release year of the show or movie"
+  = "The release year of the content"
 export const SEARCH_CONTENT_OUTPUT_DESCRIBE__RESULTS__ENTRY__ID
-  = "The provider-specific ID for the show or movie"
+  = "The provider-specific ID for the content"
