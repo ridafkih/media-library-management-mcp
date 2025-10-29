@@ -1,10 +1,12 @@
 {
-  "name": "mcp",
-  "module": "index.ts",
+  "name": "media-server-organization-mcp",
+  "description": "An MCP server that can be used for media server file organization",
+  "module": "out/index.js",
   "type": "module",
   "private": true,
+  "license": "MIT",
   "scripts": {
-    "start": "bun run --production src/index.ts",
+    "build": "bun build --target=bun --minify --outdir=out/ src/index.ts",
     "dev": "bun run --hot src/index.ts"
   },
   "devDependencies": {

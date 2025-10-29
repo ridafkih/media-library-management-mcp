@@ -22,13 +22,8 @@ If these are not set, the server will not start
 ## Running
 
 ```bash
-MCP_SERVER_PORT=3000 DATA_DIRECTORY=/path/to/your/media bun start
-```
-
-Or set it in your environment:
-
-```bash
 export MCP_SERVER_PORT=3000
 export DATA_DIRECTORY=/path/to/your/media
-bun start
+bun run build
+bun .
 ```
