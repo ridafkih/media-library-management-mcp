@@ -2,9 +2,18 @@ services:
   media-library-management-mcp-client:
     container_name: media-library-management-mcp-client
     network_mode: host
-    restart: unless-stopped
-    build: .
+    build:
+      context: .
+      secrets:
+        - OLLAMA_API_URL
+        - MEDIA_LIBRARY_MANAGEMENT_MCP_SERVER_URL
     volumes:
-      - ./PROMPT.md:/root/PROMPT.md
+      - ./PROMPT.md:/home/mcpclient/PROMPT.md:ro
     env_file:
       - .env
+
+secrets:
+  OLLAMA_API_URL:
+    environment: OLLAMA_API_URL
+  MEDIA_LIBRARY_MANAGEMENT_MCP_SERVER_URL:
+    environment: MEDIA_LIBRARY_MANAGEMENT_MCP_SERVER_URL
