@@ -1,6 +1,7 @@
 services:
   media-library-management-mcp-client:
     container_name: media-library-management-mcp-client
+    network_mode: host
     restart: unless-stopped
     build: .
     volumes:
