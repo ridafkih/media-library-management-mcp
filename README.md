@@ -43,6 +43,19 @@ DATA_DIRECTORY=/data/media/library
 
 Once your environment variables are configured, you can install and launch the server.
 
+### Clone Repository
+
+```bash
+git clone git@github.com:ridafkih/media-library-management-mcp.git
+cd media-library-management-mcp
+```
+
+### Install Dependencies
+
+```bash
+bun install
+```
+
 ### Build
 
 ```bash
