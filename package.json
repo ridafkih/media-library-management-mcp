@@ -6,6 +6,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "prestart": "bun run build",
+    "start": "bun .",
     "build": "bun build --target=bun --minify --outdir=out/ src/index.ts",
     "dev": "bun run --hot src/index.ts"
   },
