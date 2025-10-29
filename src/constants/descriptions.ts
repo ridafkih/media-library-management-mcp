@@ -6,6 +6,12 @@ export const CREATE_MOVIE_INPUT_DESCRIBE__SOURCE_FILE_PATH
   = "The path to the source file relative to pending/ to move"
 export const CREATE_MOVIE_INPUT_DESCRIBE__IDENTIFIER
   = "Optional third-party identifier (e.g., IMDB ID)"
+export const CREATE_MOVIE_INPUT_DESCRIBE__EXCLUDE
+  = "Optional exclusion rules for folder naming, can be used to match existing entries in the library"
+export const CREATE_MOVIE_INPUT_DESCRIBE__EXCLUDE__METADATA_ID
+  = "Exclude the metadataId from the resulting folder"
+export const CREATE_MOVIE_INPUT_DESCRIBE__EXCLUDE__YEAR
+  = "Exclude the year from the resulting folder"
 
 export const CREATE_MOVIE_OUTPUT_DESCRIBE__DESTINATION_PATH
   = "The path where the file was moved to"
@@ -22,6 +28,12 @@ export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SOURCE_FILE_PATH
   = "The path to the source file relative to pending/ to move"
 export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__IDENTIFIER
   = "Optional third-party identifier (e.g., imdbid-tt00000000, tmdbid-12345, anilistid-12345)"
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__EXCLUDE
+  = "Optional exclusion rules for folder naming, can be used to match existing entries in the library"
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__EXCLUDE__METADATA_ID
+  = "Exclude the metadataId from the resulting folder"
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__EXCLUDE__YEAR
+  = "Exclude the year from the resulting folder"
 
 export const CREATE_SHOW_EPISODE_OUTPUT_DESCRIBE__DESTINATION_PATH
   = "The path where the file was moved to"
