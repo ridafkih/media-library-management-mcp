@@ -2,7 +2,7 @@ import { join } from "node:path";
 import type { ToolDefinition } from "../types/tool";
 import { ListShowsOutput } from "../shapes/list-shows";
 import { dumpDirectory } from "../utils/dump-directory";
-import { ShowName, SeasonSet } from "../types/common";
+import type { ShowName, SeasonSet } from "../types/common";
 import { env } from "../env";
 
 export const listShowsTool: ToolDefinition = {

@@ -12,7 +12,8 @@
     "dev": "bun run --hot src/index.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/signale": "^1.4.7"
   },
   "peerDependencies": {
     "typescript": "^5"
@@ -21,6 +22,7 @@
     "@modelcontextprotocol/sdk": "^1.20.2",
     "arkenv": "^0.7.3",
     "arktype": "^2.1.25",
+    "signale": "^1.4.0",
     "zod": "3"
   }
 }

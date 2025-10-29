@@ -5,6 +5,7 @@ import {
   SearchContentOutput,
 } from "../shapes/search-content-database";
 import { JikanResponse, OMDBResponse } from "../schemas/api-responses";
+import { env } from "../env";
 
 export const searchContentDatabaseTool: ToolDefinition = {
   name: "SearchContentDatabase",
@@ -20,7 +21,10 @@ export const searchContentDatabaseTool: ToolDefinition = {
       throw Error("query must be a string")
     }
 
-    const results: SearchResults = {};
+    const results: SearchResults = {
+      imdb: [],
+      jikan: [],
+    };
 
     try {
       const jikanResponse = await fetch(
@@ -41,7 +45,7 @@ export const searchContentDatabaseTool: ToolDefinition = {
       results.jikan = [];
     }
 
-    const omdbApiKey = process.env.OMDB_API_KEY;
+    const omdbApiKey = env.OMDB_API_KEY;
     if (omdbApiKey) {
       try {
         const omdbResponse = await fetch(

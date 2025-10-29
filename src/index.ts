@@ -10,6 +10,8 @@ import { registerTool } from "./utils/register-tool";
 import { mcpServer } from "./mcp-server";
 import { server } from "./http-server";
 import { transport } from "./transport";
+import { logger } from "./logger";
+import { env } from "./env";
 
 registerTool(mcpServer, listPendingTool);
 registerTool(mcpServer, listShowsTool);
@@ -20,4 +22,7 @@ registerTool(mcpServer, searchContentDatabaseTool);
 registerTool(mcpServer, listEpisodesTool);
 
 await mcpServer.connect(transport);
-server.listen(process.env.MCP_SERVER_PORT);
+
+server.listen(env.MCP_SERVER_PORT, () => {
+  logger.info(`server has been started on ${env.MCP_SERVER_PORT}`)
+});

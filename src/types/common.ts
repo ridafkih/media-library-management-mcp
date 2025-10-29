@@ -2,6 +2,7 @@ export type ShowName = string;
 export type SeasonSet = Set<string>;
 
 export interface SearchResultEntry {
+  [x: string]: unknown;
   title: string;
   title_original: string;
   year: number;
@@ -9,6 +10,7 @@ export interface SearchResultEntry {
 }
 
 export interface SearchResults {
-  imdb?: SearchResultEntry[];
-  jikan?: SearchResultEntry[];
+  [x: string]: unknown;
+  imdb: SearchResultEntry[];
+  jikan: SearchResultEntry[];
 }
