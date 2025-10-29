@@ -8,7 +8,7 @@ export const env = arkenv({
 })
 
 logger.addSecrets([env.OMDB_API_KEY]);
-logger.log("environment loaded", JSON.stringify({
+logger.debug("environment loaded", JSON.stringify({
   OMDB_API_KEY: env.OMDB_API_KEY,
   MCP_SERVER_PORT: env.MCP_SERVER_PORT,
   DATA_DIRECTORY: env.DATA_DIRECTORY,
