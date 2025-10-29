@@ -218,7 +218,7 @@ mcp.registerTool("SearchContentDatabase", {
 
 mcp.registerTool("ListEpisodes", {
   title: "List Episodes",
-  description: "List all episodes for a specific show and season",
+  description: "List locally hosted episodes for a specific show and season. The list may not be inclusive of all episodes in the series.",
   inputSchema: ListEpisodesInput,
   outputSchema: ListEpisodesOutput,
 }, async (input) => {
