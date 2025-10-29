@@ -3,10 +3,12 @@ services:
     container_name: media-library-management-mcp
     restart: unless-stopped
     ports:
-      - 6600:6600
+      - ${MCP_SERVER_PORT}:${MCP_SERVER_PORT}
     build: .
+    environment:
+      DATA_DIRECTORY: /media
     volumes:
       - .:/usr/src/app
-      - ${DATA_DIRECTORY:?You must have a DATA_DIRECTORY defined}:/app/data
+      - ${DATA_DIRECTORY:?You must have a DATA_DIRECTORY defined}:/media
     env_file:
       .env
