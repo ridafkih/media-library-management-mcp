@@ -1,6 +1,6 @@
 services:
-  rida.sh-bun:
-    container_name: rida.sh-bun
+  media-library-management-mcp-bun:
+    container_name: media-library-management-mcp
     restart: unless-stopped
     ports:
       - 6600:6600
