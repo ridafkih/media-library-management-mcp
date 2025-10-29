@@ -1,5 +1,5 @@
 export const CREATE_MOVIE_INPUT_DESCRIBE__NAME
-  = "The name of the movie"
+  = "The name of the movie, should just be the desired title. Do not include the year or metadata ID here."
 export const CREATE_MOVIE_INPUT_DESCRIBE__YEAR
   = "Optional year the movie was released"
 export const CREATE_MOVIE_INPUT_DESCRIBE__SOURCE_FILE_PATH
@@ -17,7 +17,7 @@ export const CREATE_MOVIE_OUTPUT_DESCRIBE__DESTINATION_PATH
   = "The path where the file was moved to"
 
 export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__NAME
-  = "The name of the show"
+  = "The name of the show, should just be the desired title. Do not include the year or metadata ID here."
 export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__YEAR
   = "Optional year the show was released"
 export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SEASON_NUMBER
