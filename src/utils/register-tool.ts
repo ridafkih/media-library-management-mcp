@@ -18,6 +18,17 @@ export const registerTool = (
       return returnValue;
     } catch (error) {
       logger.error(`tool '${name}' failed with error`, error)
+      if (error instanceof Error) {
+        return {
+          isError: true,
+          content: [
+            {
+              type: "text",
+              text: error.message,
+            }
+          ],
+        }
+      }
     }
 
     throw Error("Something went wrong running this tool.")
