@@ -6,6 +6,7 @@ import {
 } from "../shapes/search-content-database";
 import { JikanResponse, OMDBResponse } from "../schemas/api-responses";
 import { env } from "../env";
+import { logger } from "../logger";
 
 export const searchContentDatabaseTool: ToolDefinition = {
   name: "SearchContentDatabase",
@@ -42,6 +43,7 @@ export const searchContentDatabaseTool: ToolDefinition = {
         }));
       }
     } catch (error) {
+      logger.error(`Error fetching '${query}' from Jikan`, error)
       results.jikan = [];
     }
 
@@ -63,6 +65,7 @@ export const searchContentDatabaseTool: ToolDefinition = {
           }));
         }
       } catch (error) {
+        logger.error(`Error fetching '${query}' from Omdb`, error)
         results.imdb = [];
       }
     }
