@@ -1,5 +1,5 @@
 import z, { type ZodRawShape } from "zod";
-import { LIST_PENDING_OUTPUT_DESCRIBE__PENDING_FILES, LIST_PENDING_OUTPUT_DESCRIBE__PENDING_FILES__ENTRY } from "../shape-metadata";
+import { LIST_PENDING_OUTPUT_DESCRIBE__PENDING_FILES, LIST_PENDING_OUTPUT_DESCRIBE__PENDING_FILES__ENTRY } from "../constants/descriptions";
 
 export const ListPendingOutput: ZodRawShape = {
   pendingFiles: z.array(
