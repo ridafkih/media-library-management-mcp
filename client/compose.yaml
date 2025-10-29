@@ -4,16 +4,7 @@ services:
     network_mode: host
     build:
       context: .
-      secrets:
-        - OLLAMA_API_URL
-        - MEDIA_LIBRARY_MANAGEMENT_MCP_SERVER_URL
     volumes:
       - ./PROMPT.md:/home/mcpclient/PROMPT.md:ro
     env_file:
       - .env
-
-secrets:
-  OLLAMA_API_URL:
-    environment: OLLAMA_API_URL
-  MEDIA_LIBRARY_MANAGEMENT_MCP_SERVER_URL:
-    environment: MEDIA_LIBRARY_MANAGEMENT_MCP_SERVER_URL
