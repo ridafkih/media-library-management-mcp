@@ -14,7 +14,7 @@ export const listPendingTool: ToolDefinition = {
       structuredContent: {
         pendingFiles: await dumpDirectory({
           recursive: true,
-          returnFullPath: true,
+          returnFullPath: false,
           directory: join(env.DATA_DIRECTORY, "pending"),
         }),
       },
