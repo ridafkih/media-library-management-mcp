@@ -7,5 +7,6 @@ services:
     build: .
     volumes:
       - .:/usr/src/app
+      - ${DATA_DIRECTORY:?You must have a DATA_DIRECTORY defined}:/app/data
     env_file:
       .env
