@@ -6,7 +6,7 @@ export const CreateShowEpisodeInput: ZodRawShape = {
   year: z.number().int().min(1888).max(2100).optional().describe(CREATE_SHOW_EPISODE_INPUT_DESCRIBE__YEAR),
   seasonNumber: z.number().int().min(0).describe(CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SEASON_NUMBER),
   episodeNumber: z.number().int().positive().describe(CREATE_SHOW_EPISODE_INPUT_DESCRIBE__EPISODE_NUMBER),
-  sourceFilePath: z.string().describe(CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SOURCE_FILE_PATH),
+  filePathFromPending: z.string().describe(CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SOURCE_FILE_PATH),
   identifier: z.string().optional().describe(CREATE_SHOW_EPISODE_INPUT_DESCRIBE__IDENTIFIER)
 };
 

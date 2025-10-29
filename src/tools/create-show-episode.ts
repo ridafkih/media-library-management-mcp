@@ -68,10 +68,10 @@ export const createShowEpisodeTool: ToolDefinition = {
   inputSchema: CreateShowEpisodeInput,
   outputSchema: CreateShowEpisodeOutput,
   handler: async (input) => {
-    const { name, year, seasonNumber, episodeNumber, sourceFilePath, identifier } = input;
+    const { name, year, seasonNumber, episodeNumber, filePathFromPending, identifier } = input;
 
     const validatedName = validateString(name, "name");
-    const validatedSource = validateString(sourceFilePath, "sourceFilePath");
+    const validatedSource = validateString(filePathFromPending, "filePathFromPending");
 
     const pendingDirectory = buildPendingDirectory();
     const fullSourcePath = join(pendingDirectory, validatedSource);

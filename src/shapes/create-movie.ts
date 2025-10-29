@@ -4,7 +4,7 @@ import { CREATE_MOVIE_INPUT_DESCRIBE__NAME, CREATE_MOVIE_INPUT_DESCRIBE__YEAR, C
 export const CreateMovieInput: ZodRawShape = {
   name: z.string().describe(CREATE_MOVIE_INPUT_DESCRIBE__NAME),
   year: z.number().int().min(1888).max(2100).optional().describe(CREATE_MOVIE_INPUT_DESCRIBE__YEAR),
-  sourceFilePath: z.string().describe(CREATE_MOVIE_INPUT_DESCRIBE__SOURCE_FILE_PATH),
+  filePathFromPending: z.string().describe(CREATE_MOVIE_INPUT_DESCRIBE__SOURCE_FILE_PATH),
   identifier: z.string().optional().describe(CREATE_MOVIE_INPUT_DESCRIBE__IDENTIFIER)
 };
 

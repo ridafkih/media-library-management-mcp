@@ -50,9 +50,9 @@ export const createMovieTool: ToolDefinition = {
   inputSchema: CreateMovieInput,
   outputSchema: CreateMovieOutput,
   handler: async (input) => {
-    const { name, year, sourceFilePath, identifier } = input;
+    const { name, year, filePathFromPending, identifier } = input;
 
-    const validatedSource = validateString(sourceFilePath, "sourceFilePath");
+    const validatedSource = validateString(filePathFromPending, "filePathFromPending");
 
     const pendingDirectory = buildPendingDirectory();
     const fullSourcePath = join(pendingDirectory, validatedSource);
