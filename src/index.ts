@@ -3,6 +3,7 @@ import { createServer } from "node:http";
 import { mkdir, rename } from "node:fs/promises";
 
 import { dumpDirectory } from "./utils/dump-directory";
+import { JikanResponse, OMDBResponse } from "./schemas/api-responses";
 
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { ListPendingOutput } from "./shapes/list-pending";
@@ -11,6 +12,8 @@ import { ListShowsOutput } from "./shapes/list-shows";
 import { ListMoviesOutput } from "./shapes/list-movies";
 import { CreateShowEpisodeInput, CreateShowEpisodeOutput } from "./shapes/create-show-episode";
 import { CreateMovieInput, CreateMovieOutput } from "./shapes/create-movie";
+import { SearchContentInput, SearchContentOutput } from "./shapes/search-content-database";
+import { ListEpisodesInput, ListEpisodesOutput } from "./shapes/list-episodes";
 
 type ShowName = string;
 type SeasonSet = Set<string>;
@@ -154,6 +157,102 @@ mcp.registerTool("CreateMovie", {
   return {
     content: [],
     structuredContent: { destinationPath }
+  };
+})
+
+mcp.registerTool("SearchContentDatabase", {
+  title: "Search Content Database",
+  description: "Search for content across multiple providers (Jikan for anime, OMDB for movies/shows)",
+  inputSchema: SearchContentInput,
+  outputSchema: SearchContentOutput,
+}, async (input) => {
+  const { query } = input;
+
+  const results: {
+    imdb?: Array<{ title: string; title_original: string; year: number; id: string }>;
+    jikan?: Array<{ title: string; title_original: string; year: number; id: string }>;
+  } = {};
+
+  try {
+    const jikanResponse = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(query)}&limit=10`);
+    const jikanJson = await jikanResponse.json();
+    const jikanData = JikanResponse.parse(jikanJson);
+
+    if (jikanData.data) {
+      results.jikan = jikanData.data.map((item) => ({
+        title: item.title || item.title_english || "",
+        title_original: item.title_japanese || item.title || "",
+        year: item.year || (item.aired?.from ? new Date(item.aired.from).getFullYear() : 0),
+        id: `mal-${item.mal_id}`
+      }));
+    }
+  } catch (error) {
+    results.jikan = [];
+  }
+
+  const omdbApiKey = process.env.OMDB_API_KEY;
+  if (omdbApiKey) {
+    try {
+      const omdbResponse = await fetch(`https://www.omdbapi.com/?apikey=${omdbApiKey}&s=${encodeURIComponent(query)}&type=series`);
+      const omdbJson = await omdbResponse.json();
+      const omdbData = OMDBResponse.parse(omdbJson);
+
+      if (omdbData.Search) {
+        results.imdb = omdbData.Search.map((item) => ({
+          title: item.Title,
+          title_original: item.Title,
+          year: parseInt(item.Year) || 0,
+          id: `imdb-${item.imdbID}`
+        }));
+      }
+    } catch (error) {
+      results.imdb = [];
+    }
+  }
+
+  return {
+    content: [],
+    structuredContent: results
+  };
+})
+
+mcp.registerTool("ListEpisodes", {
+  title: "List Episodes",
+  description: "List all episodes for a specific show and season",
+  inputSchema: ListEpisodesInput,
+  outputSchema: ListEpisodesOutput,
+}, async (input) => {
+  const { showName, seasonNumber } = input;
+
+  const seasonFolder = `Season ${String(seasonNumber).padStart(2, '0')}`;
+
+  const showsDirectory = join(DATA_DIRECTORY_PATH, "shows");
+  const allShows = await dumpDirectory({
+    recursive: false,
+    returnFullPath: false,
+    directory: showsDirectory,
+  });
+
+  const matchingShow = allShows.find(show => {
+    const baseName = show.split(' (')[0];
+    return baseName === showName || show === showName;
+  });
+
+  if (!matchingShow) {
+    throw new Error(`Show "${showName}" not found`);
+  }
+
+  const seasonPath = join(showsDirectory, matchingShow, seasonFolder);
+
+  const episodes = await dumpDirectory({
+    recursive: false,
+    returnFullPath: false,
+    directory: seasonPath,
+  });
+
+  return {
+    content: [],
+    structuredContent: { episodes }
   };
 })
 
