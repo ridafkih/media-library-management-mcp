@@ -14,5 +14,4 @@ FROM base AS release
 COPY --from=install /temp/prod/node_modules node_modules
 
 USER bun
-EXPOSE 3000/tcp
 ENTRYPOINT [ "bun", "start" ]
