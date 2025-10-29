@@ -3,7 +3,7 @@ export const CREATE_MOVIE_INPUT_DESCRIBE__NAME
 export const CREATE_MOVIE_INPUT_DESCRIBE__YEAR
   = "Optional year the movie was released"
 export const CREATE_MOVIE_INPUT_DESCRIBE__SOURCE_FILE_PATH
-  = "The absolute path to the source file to move"
+  = "The path to the source file relative to pending/ to move"
 export const CREATE_MOVIE_INPUT_DESCRIBE__IDENTIFIER
   = "Optional third-party identifier (e.g., IMDB ID)"
 
@@ -19,7 +19,7 @@ export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SEASON_NUMBER
 export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__EPISODE_NUMBER
   = "The episode number"
 export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SOURCE_FILE_PATH
-  = "The absolute path to the source file to move"
+  = "The path to the source file relative to pending/ to move"
 export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__IDENTIFIER
   = "Optional third-party identifier (e.g., imdbid-tt00000000, tmdbid-12345, anilistid-12345)"
 

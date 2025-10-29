@@ -1,5 +1,5 @@
 import { join, extname } from "node:path";
-import { mkdir, rename } from "node:fs/promises";
+import { mkdir, rename, access } from "node:fs/promises";
 import type { ToolDefinition } from "../types/tool";
 import {
   CreateShowEpisodeInput,
@@ -12,6 +12,14 @@ const validateString = (value: unknown, fieldName: string): string => {
     throw Error(`${fieldName} must be a string`);
   }
   return value;
+};
+
+const validateFileExists = async (filePath: string): Promise<void> => {
+  try {
+    await access(filePath);
+  } catch {
+    throw Error(`File does not exist in pending directory: ${filePath}`);
+  }
 };
 
 const formatShowFolderName = (
@@ -44,6 +52,9 @@ const buildShowDirectory = (
   seasonFolder: string
 ): string => join(env.DATA_DIRECTORY, "shows", showFolder, seasonFolder);
 
+const buildPendingDirectory = (): string =>
+  join(env.DATA_DIRECTORY, "pending");
+
 const moveFile = async (source: string, destination: string): Promise<void> => {
   const directory = join(destination, "..");
   await mkdir(directory, { recursive: true });
@@ -62,6 +73,11 @@ export const createShowEpisodeTool: ToolDefinition = {
     const validatedName = validateString(name, "name");
     const validatedSource = validateString(sourceFilePath, "sourceFilePath");
 
+    const pendingDirectory = buildPendingDirectory();
+    const fullSourcePath = join(pendingDirectory, validatedSource);
+
+    await validateFileExists(fullSourcePath);
+
     const extension = extname(validatedSource);
     const showFolder = formatShowFolderName(validatedName, year as number | undefined, identifier as string | undefined);
     const seasonFolder = formatSeasonFolder(seasonNumber as number);
@@ -75,7 +91,7 @@ export const createShowEpisodeTool: ToolDefinition = {
     const showDirectory = buildShowDirectory(showFolder, seasonFolder);
     const destinationPath = join(showDirectory, episodeFilename);
 
-    await moveFile(validatedSource, destinationPath);
+    await moveFile(fullSourcePath, destinationPath);
 
     return {
       content: [],

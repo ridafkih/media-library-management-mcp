@@ -1,5 +1,5 @@
 import { join, extname } from "node:path";
-import { mkdir, rename } from "node:fs/promises";
+import { mkdir, rename, access } from "node:fs/promises";
 import type { ToolDefinition } from "../types/tool";
 import { CreateMovieInput, CreateMovieOutput } from "../shapes/create-movie";
 import { env } from "../env";
@@ -9,6 +9,14 @@ const validateString = (value: unknown, fieldName: string): string => {
     throw Error(`${fieldName} must be a string`);
   }
   return value;
+};
+
+const validateFileExists = async (filePath: string): Promise<void> => {
+  try {
+    await access(filePath);
+  } catch {
+    throw Error(`File does not exist in pending directory: ${filePath}`);
+  }
 };
 
 const formatMovieFilename = (
@@ -25,6 +33,9 @@ const formatMovieFilename = (
 
 const buildMoviesDirectory = (): string =>
   join(env.DATA_DIRECTORY, "movies");
+
+const buildPendingDirectory = (): string =>
+  join(env.DATA_DIRECTORY, "pending");
 
 const moveFile = async (source: string, destination: string): Promise<void> => {
   const directory = join(destination, "..");
@@ -43,6 +54,11 @@ export const createMovieTool: ToolDefinition = {
 
     const validatedSource = validateString(sourceFilePath, "sourceFilePath");
 
+    const pendingDirectory = buildPendingDirectory();
+    const fullSourcePath = join(pendingDirectory, validatedSource);
+
+    await validateFileExists(fullSourcePath);
+
     const extension = extname(validatedSource);
     const movieFilename = formatMovieFilename(
       name as string,
@@ -54,7 +70,7 @@ export const createMovieTool: ToolDefinition = {
     const moviesDirectory = buildMoviesDirectory();
     const destinationPath = join(moviesDirectory, movieFilename);
 
-    await moveFile(validatedSource, destinationPath);
+    await moveFile(fullSourcePath, destinationPath);
 
     return {
       content: [],
