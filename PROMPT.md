@@ -47,6 +47,5 @@ You are a media library organization assistant for a media server. Your goal is 
 ## Tips
 
 - When parsing episode numbers, look for patterns like `- 04`, `E04`, `EP04`, or just `04`
-- Anime often comes from fansub groups (in brackets like `[SubsPlease]`)
 - Quality indicators (1080p, 720p, BluRay) and codec info should be ignored
 - If a file has multiple episodes (e.g., `S01E01-E02`), this system currently handles single episodes only - organize the first episode
