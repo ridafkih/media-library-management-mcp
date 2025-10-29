@@ -1,3 +1,5 @@
+model_provider = "ollama"
+
 [model_providers.ollama]
 name = "Ollama"
 base_url = "${OLLAMA_API_URL}"
