@@ -1,6 +1,6 @@
-[model_providers.openai-api]
-name = "OpenAIAPI"
-base_url = "${OPENAI_API_URL}"
+[model_providers.ollama]
+name = "Ollama"
+base_url = "${OLLAMA_API_URL}"
 
 [mcp_servers.media-library-management-mcp-server]
 type = "streamable-http"
