@@ -1,7 +1,8 @@
 import z, { type ZodRawShape } from "zod";
+import { LIST_MOVIES_OUTPUT_DESCRIBE__MOVIES, LIST_MOVIES_OUTPUT_DESCRIBE__MOVIES__ENTRY } from "../constants/descriptions";
 
 export const ListMoviesOutput: ZodRawShape = {
   movies: z.array(
-    z.string().describe("The name of the movie")
-  ).describe("A list of movies")
+    z.string().describe(LIST_MOVIES_OUTPUT_DESCRIBE__MOVIES__ENTRY)
+  ).describe(LIST_MOVIES_OUTPUT_DESCRIBE__MOVIES)
 }

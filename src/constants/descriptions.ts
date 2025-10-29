@@ -1,3 +1,57 @@
+export const CREATE_MOVIE_INPUT_DESCRIBE__NAME
+  = "The name of the movie"
+export const CREATE_MOVIE_INPUT_DESCRIBE__YEAR
+  = "Optional year the movie was released"
+export const CREATE_MOVIE_INPUT_DESCRIBE__SOURCE_FILE_PATH
+  = "The absolute path to the source file to move"
+export const CREATE_MOVIE_INPUT_DESCRIBE__IDENTIFIER
+  = "Optional third-party identifier (e.g., IMDB ID)"
+
+export const CREATE_MOVIE_OUTPUT_DESCRIBE__DESTINATION_PATH
+  = "The path where the file was moved to"
+
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__NAME
+  = "The name of the show"
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__YEAR
+  = "Optional year the show was released"
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SEASON_NUMBER
+  = "The season number (0 for specials)"
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__EPISODE_NUMBER
+  = "The episode number"
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__SOURCE_FILE_PATH
+  = "The absolute path to the source file to move"
+export const CREATE_SHOW_EPISODE_INPUT_DESCRIBE__IDENTIFIER
+  = "Optional third-party identifier (e.g., imdbid-tt00000000, tmdbid-12345, anilistid-12345)"
+
+export const CREATE_SHOW_EPISODE_OUTPUT_DESCRIBE__DESTINATION_PATH
+  = "The path where the file was moved to"
+
+export const LIST_EPISODES_INPUT_DESCRIBE__SHOW_NAME
+  = "The name of the show"
+export const LIST_EPISODES_INPUT_DESCRIBE__SEASON_NUMBER
+  = "The season number"
+
+export const LIST_EPISODES_OUTPUT_DESCRIBE__EPISODES
+  = "An array of strings representing episodes"
+export const LIST_EPISODES_OUTPUT_DESCRIBE__EPISODES__ENTRY
+  = "Sourced from the content file-name, a string representing the episode"
+
+export const LIST_MOVIES_OUTPUT_DESCRIBE__MOVIES
+  = "A list of movies"
+export const LIST_MOVIES_OUTPUT_DESCRIBE__MOVIES__ENTRY
+  = "The name of the movie"
+
+export const LIST_SHOWS_OUTPUT_DESCRIBE__SHOWS
+  = "A list of shows"
+export const LIST_SHOWS_OUTPUT_DESCRIBE__SHOWS__ENTRY
+  = "An object containing show metadata"
+export const LIST_SHOWS_OUTPUT_DESCRIBE__SHOWS__ENTRY__NAME
+  = "The show name, also used as the folder name"
+export const LIST_SHOWS_OUTPUT_DESCRIBE__SHOWS__ENTRY__SEASONS
+  = "An array of season names"
+export const LIST_SHOWS_OUTPUT_DESCRIBE__SHOWS__ENTRY__SEASONS__ENTRY
+  = "The season name"
+
 export const LIST_PENDING_OUTPUT_DESCRIBE__PENDING_FILES
   = "An array of full file path (relative) pending renaming and organization, may be shows or movies"
 export const LIST_PENDING_OUTPUT_DESCRIBE__PENDING_FILES__ENTRY
