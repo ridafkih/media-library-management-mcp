@@ -7,11 +7,19 @@ export const registerTool = (
   { name, handler, ...options }: ToolDefinition
 ) => {
   logger.debug(`registering tool '${name}'`)
-  return mcpServer.registerTool(name, options, (args, extra) => {
+  return mcpServer.registerTool(name, options, async (args, extra) => {
     logger.info(`called tool '${name}`)
     logger.debug(`tool '${name}' was called with arguments ${JSON.stringify(args, null, 0)}`)
-    const returnValue = handler(args, extra);
-    logger.debug(`tool '${name}' returned ${JSON.stringify(returnValue, null, 0)}`)
-    return returnValue;
+    
+    try {
+      const returnValue = await handler(args, extra);
+
+      logger.debug(`tool '${name}' returned ${JSON.stringify(returnValue, null, 0)}`)
+      return returnValue;
+    } catch (error) {
+      logger.error(`tool '${name}' failed with error`, error)
+    }
+
+    throw Error("Something went wrong running this tool.")
   });
 };
