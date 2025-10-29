@@ -127,6 +127,7 @@ When user says "Organize the pending files":
 
 - Search externally before checking local library
 - Add metadata to existing library entries
+- Stop until the entire pending/ folder has been organized
 
 **Always**:
 
