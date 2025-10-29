@@ -5,8 +5,7 @@ import {
   CreateShowEpisodeInput,
   CreateShowEpisodeOutput,
 } from "../shapes/create-show-episode";
-
-const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
+import { env } from "../env";
 
 const validateString = (value: unknown, fieldName: string): string => {
   if (typeof value !== "string") {
@@ -43,7 +42,7 @@ const formatEpisodeFilename = (
 const buildShowDirectory = (
   showFolder: string,
   seasonFolder: string
-): string => join(DATA_DIRECTORY_PATH, "shows", showFolder, seasonFolder);
+): string => join(env.DATA_DIRECTORY, "shows", showFolder, seasonFolder);
 
 const moveFile = async (source: string, destination: string): Promise<void> => {
   const directory = join(destination, "..");

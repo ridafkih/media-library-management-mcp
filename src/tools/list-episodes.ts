@@ -2,6 +2,7 @@ import { join } from "node:path";
 import type { ToolDefinition } from "../types/tool";
 import { ListEpisodesInput, ListEpisodesOutput } from "../shapes/list-episodes";
 import { dumpDirectory } from "../utils/dump-directory";
+import { env } from "../env";
 
 export const listEpisodesTool: ToolDefinition = {
   name: "ListEpisodes",
@@ -11,12 +12,11 @@ export const listEpisodesTool: ToolDefinition = {
   inputSchema: ListEpisodesInput,
   outputSchema: ListEpisodesOutput,
   handler: async (input) => {
-    const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
     const { showName, seasonNumber } = input;
 
     const seasonFolder = `Season ${String(seasonNumber).padStart(2, "0")}`;
 
-    const showsDirectory = join(DATA_DIRECTORY_PATH, "shows");
+    const showsDirectory = join(env.DATA_DIRECTORY, "shows");
     const allShows = await dumpDirectory({
       recursive: false,
       returnFullPath: false,

@@ -3,6 +3,7 @@ import type { ToolDefinition } from "../types/tool";
 import { ListShowsOutput } from "../shapes/list-shows";
 import { dumpDirectory } from "../utils/dump-directory";
 import { ShowName, SeasonSet } from "../types/common";
+import { env } from "../env";
 
 export const listShowsTool: ToolDefinition = {
   name: "ListShows",
@@ -10,13 +11,12 @@ export const listShowsTool: ToolDefinition = {
   description: "Get a list of file paths for files that are pending organization",
   outputSchema: ListShowsOutput,
   handler: async () => {
-    const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
     const showsMap = new Map<ShowName, SeasonSet>();
 
     const files = await dumpDirectory({
       recursive: true,
       returnFullPath: false,
-      directory: join(DATA_DIRECTORY_PATH, "shows"),
+      directory: join(env.DATA_DIRECTORY, "shows"),
     });
 
     for (const file of files) {

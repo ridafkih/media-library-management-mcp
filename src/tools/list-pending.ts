@@ -2,6 +2,7 @@ import { join } from "node:path";
 import type { ToolDefinition } from "../types/tool";
 import { ListPendingOutput } from "../shapes/list-pending";
 import { dumpDirectory } from "../utils/dump-directory";
+import { env } from "../env";
 
 export const listPendingTool: ToolDefinition = {
   name: "ListPending",
@@ -9,14 +10,12 @@ export const listPendingTool: ToolDefinition = {
   description: "Get a list of file paths for files that are pending organization",
   outputSchema: ListPendingOutput,
   handler: async () => {
-    const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
-
     return {
       structuredContent: {
         pendingFiles: await dumpDirectory({
           recursive: true,
           returnFullPath: true,
-          directory: join(DATA_DIRECTORY_PATH, "pending"),
+          directory: join(env.DATA_DIRECTORY, "pending"),
         }),
       },
       content: [],

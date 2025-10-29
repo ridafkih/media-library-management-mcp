@@ -20,4 +20,4 @@ registerTool(mcpServer, searchContentDatabaseTool);
 registerTool(mcpServer, listEpisodesTool);
 
 await mcpServer.connect(transport);
-server.listen(3000);
+server.listen(process.env.MCP_SERVER_PORT);

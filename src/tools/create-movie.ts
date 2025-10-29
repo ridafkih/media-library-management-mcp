@@ -2,8 +2,7 @@ import { join, extname } from "node:path";
 import { mkdir, rename } from "node:fs/promises";
 import type { ToolDefinition } from "../types/tool";
 import { CreateMovieInput, CreateMovieOutput } from "../shapes/create-movie";
-
-const DATA_DIRECTORY_PATH = join(import.meta.dir, "..", "..", ".playground");
+import { env } from "../env";
 
 const validateString = (value: unknown, fieldName: string): string => {
   if (typeof value !== "string") {
@@ -25,7 +24,7 @@ const formatMovieFilename = (
 };
 
 const buildMoviesDirectory = (): string =>
-  join(DATA_DIRECTORY_PATH, "movies");
+  join(env.DATA_DIRECTORY, "movies");
 
 const moveFile = async (source: string, destination: string): Promise<void> => {
   const directory = join(destination, "..");

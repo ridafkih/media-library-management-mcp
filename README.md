@@ -1,15 +1,34 @@
 # mcp
 
+Media organization MCP server for managing your media server library.
+
+## Setup
+
 To install dependencies:
 
 ```bash
 bun install
 ```
 
-To run:
+## Configuration
+
+**Required Environment Variable:**
+
+- `DATA_DIRECTORY` - The root directory where your media library is stored (e.g., `/path/to/media`)
+- `MCP_SERVER_PORT` - The port for which to host the MCP server on
+
+If these are not set, the server will not start
+
+## Running
 
 ```bash
-bun run index.ts
+MCP_SERVER_PORT=3000 DATA_DIRECTORY=/path/to/your/media bun start
 ```
 
-This project was created using `bun init` in bun v1.3.0. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+Or set it in your environment:
+
+```bash
+export MCP_SERVER_PORT=3000
+export DATA_DIRECTORY=/path/to/your/media
+bun start
+```
