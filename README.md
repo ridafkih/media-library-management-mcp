@@ -1,4 +1,4 @@
-# mcp
+# media-library-management-mcp
 
 Media organization MCP server for managing your media server library.
 

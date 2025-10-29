@@ -1,6 +1,6 @@
 {
-  "name": "media-server-organization-mcp",
-  "description": "An MCP server that can be used for media server file organization",
+  "name": "media-library-management-mcp",
+  "description": "An MCP server that can be used for media library files",
   "module": "out/index.js",
   "type": "module",
   "private": true,
