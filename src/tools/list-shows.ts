@@ -37,7 +37,12 @@ export const listShowsTool: ToolDefinition = {
     }));
 
     return {
-      content: [],
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify({ shows }),
+        }
+      ],
       structuredContent: { shows },
     };
   },

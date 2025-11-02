@@ -10,15 +10,22 @@ export const listPendingTool: ToolDefinition = {
   description: "Get a list of file paths for files that are pending organization",
   outputSchema: ListPendingOutput,
   handler: async () => {
-    return {
-      structuredContent: {
+    const structuredContent = {
         pendingFiles: await dumpDirectory({
           recursive: true,
           returnFullPath: false,
           directory: join(env.DATA_DIRECTORY, "pending"),
         }),
-      },
-      content: [],
+      };
+    
+    return {
+      structuredContent,
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify(structuredContent),
+        }
+      ],
     };
   },
 };

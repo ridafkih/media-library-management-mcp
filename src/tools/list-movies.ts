@@ -18,7 +18,12 @@ export const listMoviesTool: ToolDefinition = {
     });
 
     return {
-      content: [],
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify({ movies: files })
+        }
+      ],
       structuredContent: { movies: files },
     };
   },

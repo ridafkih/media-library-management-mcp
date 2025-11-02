@@ -71,7 +71,10 @@ export const searchContentDatabaseTool: ToolDefinition = {
     }
 
     return {
-      content: [],
+      content: [{
+        type: "text",
+        text: JSON.stringify(results),
+      }],
       structuredContent: results,
     };
   },

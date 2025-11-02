@@ -73,7 +73,12 @@ export const createMovieTool: ToolDefinition = {
     await moveFile(fullSourcePath, destinationPath);
 
     return {
-      content: [],
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify({ destinationPath }),
+        },
+      ],
       structuredContent: { destinationPath },
     };
   },

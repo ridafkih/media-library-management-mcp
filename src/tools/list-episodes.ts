@@ -41,7 +41,12 @@ export const listEpisodesTool: ToolDefinition = {
     });
 
     return {
-      content: [],
+      content: [
+        {
+          type: "text",
+          text: JSON.stringify({ episodes }),
+        },
+      ],
       structuredContent: { episodes },
     };
   },
